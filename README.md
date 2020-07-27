@@ -10,7 +10,7 @@ This will run the solr, atlas, Cassandra and zookeeper pods
 
 solr version : 7.5
 
-atlas version : 1.1.0
+atlas version : 2.1.0
 
 cassandra version : 3.11.3
 
@@ -21,9 +21,9 @@ Download the Source code of Apache Atlas from here [Download](http://atlas.apach
 ## Build Atlas from source
 
 ```sh
-tar xvfz apache-atlas-1.1.0-sources.tar.gz
+tar xvfz apache-atlas-2.1.0-sources.tar.gz
 
-cd apache-atlas-sources-1.1.0/
+cd apache-atlas-sources-2.1.0/
 
 mvn clean -DskipTests install
 ```

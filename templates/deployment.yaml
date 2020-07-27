@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
@@ -9,6 +9,10 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+        app: {{ template "name" . }}
+        release: {{ .Release.Name }}
   template:
     metadata:
       labels:
@@ -24,7 +28,7 @@ spec:
                     "-c",
                     "apk update;
                      apk add curl zip;
-                     zip config.zip /apache-atlas-1.1.0/conf/solr/*;
+                     zip config.zip /apache-atlas-2.1.0/conf/solr/*;
                      curl -X POST --header 'Content-Type:text/xml' -d @config.zip 'http://{{ .Release.Name }}-solr-headless:8983/solr/admin/configs?action=CREATE&name=vertex_index';
                      curl -X POST --header 'Content-Type:text/xml' -d @config.zip 'http://{{ .Release.Name }}-solr-headless:8983/solr/admin/configs?action=CREATE&name=edge_index';
                      curl -X POST --header 'Content-Type:text/xml' -d @config.zip 'http://{{ .Release.Name }}-solr-headless:8983/solr/admin/configs?action=CREATE&name=fulltext_index';"
@@ -37,8 +41,8 @@ spec:
           command: [
                     "/bin/bash",
                     "-c",
-                    "/apache-atlas-1.1.0/bin/atlas_start.py;
-                      tail -f /apache-atlas-1.1.0/logs/*.log;"
+                    "/apache-atlas-2.1.0/bin/atlas_start.py;
+                      tail -f /apache-atlas-2.1.0/logs/*.log;"
                     ]
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -52,7 +56,7 @@ spec:
     {{- end }}
           volumeMounts:
           - name: atlas-config
-            mountPath: /apache-atlas-1.1.0/conf/atlas-application.properties
+            mountPath: /apache-atlas-2.1.0/conf/atlas-application.properties
             subPath: atlas-application.properties            
       volumes:
       - name: atlas-config

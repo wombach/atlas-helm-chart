@@ -8,18 +8,18 @@ RUN apk add --no-cache \
 # Define versions of apache atlas
 
 # Add local bin archive
-COPY apache-atlas-1.1.0-server.tar.gz /
+COPY apache-atlas-2.1.0-server.tar.gz /
 
 # Unarchive
 RUN set -x \
     && cd / \
-    && tar -xzf apache-atlas-1.1.0-server.tar.gz \
-    && rm apache-atlas-1.1.0-server.tar.gz
+    && tar -xzf apache-atlas-2.1.0-server.tar.gz \
+    && rm apache-atlas-2.1.0-server.tar.gz
 
 
-WORKDIR /apache-atlas-1.1.0
+WORKDIR /apache-atlas-2.1.0
 
 EXPOSE 21000
 
-ENV PATH=$PATH:/apache-atlas-1.1.0/bin
-CMD ["/bin/bash", "-c", "/apache-atlas-1.1.0/bin/atlas_start.py; tail -fF /apache-atlas-1.1.0/logs/application.log"]
+ENV PATH=$PATH:/apache-atlas-2.1.0/bin
+CMD ["/bin/bash", "-c", "/apache-atlas-2.1.0/bin/atlas_start.py; tail -fF /apache-atlas-2.1.0/logs/application.log"]
