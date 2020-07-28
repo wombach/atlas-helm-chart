@@ -4,11 +4,9 @@ metadata:
   name: atlas-config
 data:
   atlas-application.properties: |
-    atlas.graph.storage.backend=cql
-    atlas.graph.storage.hostname={{ .Release.Name }}-cassandra
-    atlas.graph.storage.cassandra.keyspace=JanusGraph
-    atlas.graph.storage.clustername={{ .Values.config_parameter.cassandra_clustername  }}
-    atlas.graph.storage.port={{ .Values.config_parameter.cassandra_storage_port  }}
+    atlas.graph.storage.backend=hbase
+    atlas.graph.storage.hostname=hbase-zookeeper:2181
+    atlas.graph.storage.hbase.table=atlas
 
     atlas.EntityAuditRepository.impl=org.apache.atlas.repository.audit.CassandraBasedAuditRepository
     atlas.EntityAuditRepository.keyspace=atlas_audit
