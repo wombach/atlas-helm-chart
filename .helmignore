@@ -10,6 +10,7 @@
 .hg/
 .hgignore
 .svn/
+.terraform/
 # Common backup files
 *.swp
 *.bak
