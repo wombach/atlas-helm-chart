@@ -1,6 +1,8 @@
 FROM openjdk:8-jdk-alpine
 # Install required packages for installation
 RUN apk add --no-cache \
+    curl \
+    zip \
     bash \
     su-exec \
     python 
