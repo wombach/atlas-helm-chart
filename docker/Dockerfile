@@ -4,10 +4,7 @@ RUN apk add --no-cache \
     curl \
     zip \
     bash \
-    su-exec \
     python 
-
-# Define versions of apache atlas
 
 # Add local bin archive
 COPY apache-atlas-2.1.0-server.tar.gz /
@@ -18,8 +15,13 @@ RUN set -x \
     && tar -xzf apache-atlas-2.1.0-server.tar.gz \
     && rm apache-atlas-2.1.0-server.tar.gz
 
-
 WORKDIR /apache-atlas-2.1.0
+
+# Add non root user
+RUN adduser -S atlas \
+    && chmod 777 -R /apache-atlas-2.1.0
+
+USER atlas
 
 EXPOSE 21000
 
