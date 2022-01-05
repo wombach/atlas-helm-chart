@@ -6,6 +6,11 @@ To install the chart. clone the repo and run following command to install chart
 ```sh
 helm install --name <any release name> -f atlas-helm-chart/values.yaml atlas-helm-chart
 ```
+
+```sh
+cd /home/wombach/helm/wombach
+helm install --generate-name -f atlas-helm-chart/values.yaml atlas-helm-chart
+```
 This will run the solr, atlas, Cassandra and zookeeper pods
 
 solr version : 7.5
